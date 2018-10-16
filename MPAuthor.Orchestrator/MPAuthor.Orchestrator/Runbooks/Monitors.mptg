@@ -1,0 +1,42 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance1cb8bbbf42bb4bd8ba0ce5a2d4aaa2da" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>MPAuthor.Orchestrator.MonitorType.RunbookRunning</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;600&lt;/IntervalSeconds&gt;&lt;SyncTime&gt;&lt;/SyncTime&gt;&lt;WebServer&gt;$Target/Host/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/WebServer&gt;&lt;RunbookId&gt;$Target/Property[Type="MPAuthor.Orchestrator.Runbook"]/ID$&lt;/RunbookId&gt;&lt;Debug&gt;false&lt;/Debug&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Running</OperationalStateId>
+            <OperationalStateDisplayName>Running</OperationalStateDisplayName>
+            <MonitorTypeStateId>Running</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>NotRunning</OperationalStateId>
+            <OperationalStateDisplayName>NotRunning</OperationalStateDisplayName>
+            <MonitorTypeStateId>NotRunning</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <MonitorRunAs>MPAuthor.Orchestrator.RunAsProfile.WebServiceAccount</MonitorRunAs>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Public</Accessibility>
+        <Id>Monitor.RunbookRunning</Id>
+        <DisplayName>Runbook Running</DisplayName>
+        <Description>Monitors whether a runbook is running.  Disabled by default.  Create a group with critical runbooks and an override to enable.  Only meant to be used with runbooks that start with a monitor activity.</Description>
+        <Target>MPAuthor.Orchestrator.Runbook</Target>
+        <Enabled>false</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>Error</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>Error</AlertSeverity>
+        <AlertName>Runbook not running</AlertName>
+        <AlertDescription>No running jobs were found for the runbook.</AlertDescription>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

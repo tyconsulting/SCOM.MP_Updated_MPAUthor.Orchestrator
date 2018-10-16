@@ -1,0 +1,96 @@
+﻿<ManagementPackFragment SchemaVersion="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <TypeDefinitions>
+    <ModuleTypes>
+
+      <WriteActionModuleType ID="MPAuthor.Orchestrator.WriteAction.StartRunbook" Accessibility ="Public">
+        <Configuration>
+          <xsd:element minOccurs="1" name="RunbookPath" type="xsd:string" />
+          <xsd:element minOccurs="1" name="ParameterString" type="xsd:string" />
+          <xsd:element minOccurs="1" name="WebServer" type="xsd:string" />
+          <xsd:element minOccurs="1" name="WaitUntilDone" type="xsd:boolean" />
+          <xsd:element minOccurs="1" name="Debug" type="xsd:boolean" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID ="RunbookPath" Selector="$Config/RunbookPath$" ParameterType="string"/>
+          <OverrideableParameter ID ="ParameterString" Selector="$Config/ParameterString$" ParameterType="string"/>
+          <OverrideableParameter ID ="WebServer" Selector="$Config/WebServer$" ParameterType="string"/>         
+          <OverrideableParameter ID ="WaitUntilDone" Selector="$Config/WaitUntilDone$" ParameterType="bool"/>
+          <OverrideableParameter ID ="Debug" Selector="$Config/Debug$" ParameterType="bool"/>
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <WriteAction ID="Script" TypeID="Windows!Microsoft.Windows.PowerShellWriteAction">
+                <ScriptName>StartRunbook</ScriptName>
+                <ScriptBody>$IncludeFileContent/Runbooks/Scripts/StartRunbook.ps1$</ScriptBody>
+                <Parameters>
+                  <Parameter>
+                    <Name>webServer</Name>
+                    <Value>$Config/WebServer$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>runbookPath</Name>
+                    <Value>$Config/RunbookPath$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>paramString</Name>
+                    <Value>$Config/ParameterString$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>waitUntilDone</Name>
+                    <Value>$Config/WaitUntilDone$</Value>
+                  </Parameter>
+                  <Parameter>
+                    <Name>debug</Name>
+                    <Value>$Config/Debug$</Value>
+                  </Parameter>
+                </Parameters>
+                <TimeoutSeconds>300</TimeoutSeconds>
+              </WriteAction>
+            </MemberModules>
+            <Composition>
+              <Node ID ="Script" />
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>Windows!Microsoft.Windows.SerializedObjectData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </WriteActionModuleType>
+
+    </ModuleTypes>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        
+        <DisplayString ElementID="MPAuthor.Orchestrator.WriteAction.StartRunbook">
+          <Name>Runbook Statistics Data Source</Name>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.WriteAction.StartRunbook" SubElementID="RunbookPath">
+          <Name>Runbook Path</Name>
+          <Description>Path and name of the runbook to start.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.WriteAction.StartRunbook" SubElementID="ParameterString">
+          <Name>Parameter String</Name>
+          <Description>String of parameter names and values if the runbook requires them.  Should be in the form Param1=Value1;Param2=Value2;Param3=Value3.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.WriteAction.StartRunbook" SubElementID="WebServer">
+          <Name>Web Server</Name>
+          <Description>Name of the computer running the Orchestrator web service.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.WriteAction.StartRunbook" SubElementID="WaitUntilDone">
+          <Name>Wait Until Done</Name>
+          <Description>If true, the module waits until the runbook is completed and returns its output.  Default is false.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.WriteAction.StartRunbook" SubElementID="Debug">
+          <Name>Debug</Name>
+          <Description>If True, debug events are written to the OperationsManager event log.</Description>
+        </DisplayString>
+        
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+  
+</ManagementPackFragment>

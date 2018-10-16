@@ -1,0 +1,68 @@
+﻿<ManagementPackFragment SchemaVersion="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+
+        <ClassType ID="MPAuthor.Orchestrator.Runbook" Base="Windows!Microsoft.Windows.ApplicationComponent" Accessibility="Public" Abstract="false" Hosted="true" Singleton="false">
+          <Property ID="ID" Type="string" Key="true" CaseSensitive="false"  MinLength="0" MaxLength="256" />
+          <Property ID="Name" Type="string" Key="false" CaseSensitive="false"  MinLength="0" MaxLength="256" />
+          <Property ID="Path" Type="string" Key="false" CaseSensitive="false"  MinLength="0" MaxLength="256" />
+          <Property ID="WebPath" Type="string" Key="false" CaseSensitive="false"  MinLength="0" MaxLength="256" />
+          <Property ID="IsMonitor" Type="bool" Key="false" />
+        </ClassType>
+
+        <ClassType ID="MPAuthor.Orchestrator.Group.MonitorRunbooks" Base="SCIG!Microsoft.SystemCenter.InstanceGroup" Accessibility="Public" Abstract="false" Singleton="true"></ClassType>
+
+      </ClassTypes>
+
+      <RelationshipTypes>
+        <RelationshipType ID="MPAuthor.Orchestrator.ManagementServerHostsRunbook" Accessibility="Public" Abstract="false" Base="System!System.Hosting">
+          <Source ID="Source" Type="Orch2012!Microsoft.SystemCenter.2012.Orchestrator.Role.ManagementServer" />
+          <Target ID="Target" Type="MPAuthor.Orchestrator.Runbook"/>
+        </RelationshipType>
+      </RelationshipTypes>     
+    </EntityTypes>
+  </TypeDefinitions>
+
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>       
+        <DisplayString ElementID="MPAuthor.Orchestrator.Runbook">
+          <Name>Orchestrator Runbook</Name>
+          <Description>Orchestrator runbook.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.Runbook" SubElementID="ID">
+          <Name>ID</Name>
+          <Description>ID of the runbook.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.Runbook" SubElementID="Name">
+          <Name>Name</Name>
+          <Description>Name of the runbook.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.Runbook" SubElementID="Path">
+          <Name>Path</Name>
+          <Description>Full path of the runbook.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.Runbook" SubElementID="WebPath">
+          <Name>WebPath</Name>
+          <Description>Full URL to retrieve the runbook with the Orchestrator web service.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.Runbook" SubElementID="IsMonitor">
+          <Name>Is Monitor</Name>
+          <Description>Specifies whether the runbook starts with a monitor activity.</Description>
+        </DisplayString>
+        
+        <DisplayString ElementID="MPAuthor.Orchestrator.Group.MonitorRunbooks">
+          <Name>MPAuthor Monitor Runbooks</Name>
+        </DisplayString>
+
+        <DisplayString ElementID="MPAuthor.Orchestrator.ManagementServerHostsRunbook">
+          <Name>Orchestrator Management Server hosts Runbooks</Name>
+        </DisplayString>
+        
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+  
+</ManagementPackFragment>

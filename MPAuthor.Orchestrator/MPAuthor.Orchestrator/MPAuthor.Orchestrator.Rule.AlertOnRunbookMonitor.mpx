@@ -1,0 +1,75 @@
+﻿<ManagementPackFragment SchemaVersion="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Monitoring>
+    <Rules>
+      <Rule ID="MPAuthor.Orchestrator.Rule.AlertOnRunbookMonitor" Target="Orch2012!Microsoft.SystemCenter.2012.Orchestrator.Role.ManagementServer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>Alert</Category>
+        <DataSources>
+          <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.EventProvider">
+            <ComputerName>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</ComputerName>
+            <LogName>Operations Manager</LogName>
+            <Expression>
+              <And>
+                <Expression>
+                  <SimpleExpression>
+                    <ValueExpression>
+                      <XPathQuery Type="UnsignedInteger">EventDisplayNumber</XPathQuery>
+                    </ValueExpression>
+                    <Operator>Equal</Operator>
+                    <ValueExpression>
+                      <Value Type="UnsignedInteger">325</Value>
+                    </ValueExpression>
+                  </SimpleExpression>
+                </Expression>
+                <Expression>
+                  <SimpleExpression>
+                    <ValueExpression>
+                      <XPathQuery Type="String">PublisherName</XPathQuery>
+                    </ValueExpression>
+                    <Operator>Equal</Operator>
+                    <ValueExpression>
+                      <Value Type="String">Health Service Script</Value>
+                    </ValueExpression>
+                  </SimpleExpression>
+                </Expression>
+              </And>
+            </Expression>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="Alert" TypeID="Health!System.Health.GenerateAlert">
+            <Priority>1</Priority>
+            <Severity>2</Severity>
+            <AlertMessageId>$MPElement[Name="MPAuthor.Orchestrator.Rule.AlertOnRunbookMonitor.AlertMessage"]$</AlertMessageId>
+            <AlertParameters>
+              <AlertParameter1>$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</AlertParameter1>
+            </AlertParameters>
+            <Suppression>
+              <SuppressionValue>$Data/LoggingComputer$</SuppressionValue>
+              <SuppressionValue>$Data/EventDisplayNumber$</SuppressionValue>
+              <SuppressionValue>$Data/PublisherName$</SuppressionValue>
+            </Suppression>
+          </WriteAction>
+        </WriteActions>
+      </Rule>
+    </Rules>
+  </Monitoring>
+  <Presentation>
+    <StringResources>
+      <StringResource ID="MPAuthor.Orchestrator.Rule.AlertOnRunbookMonitor.AlertMessage" />
+    </StringResources>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="MPAuthor.Orchestrator.Rule.AlertOnRunbookMonitor">
+          <Name>Alert on failure of Runbook Monitor</Name>
+          <Description>Create alert when the Runbook Monitor process was unable to retrieve any runbooks.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.Rule.AlertOnRunbookMonitor.AlertMessage">
+          <Name>Runbook Monitor was unable to retrieve any runbooks.</Name>
+          <Description>The discovery was run against {0}.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

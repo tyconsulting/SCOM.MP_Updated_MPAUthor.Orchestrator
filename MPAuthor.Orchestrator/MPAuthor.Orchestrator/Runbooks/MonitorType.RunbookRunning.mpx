@@ -1,0 +1,159 @@
+﻿<ManagementPackFragment SchemaVersion="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <TypeDefinitions>
+     <MonitorTypes>
+      
+      <UnitMonitorType ID="MPAuthor.Orchestrator.MonitorType.RunbookRunning" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="Running" NoDetection="false" />
+          <MonitorTypeState ID="NotRunning" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element minOccurs="1" name="IntervalSeconds" type="xsd:integer" />
+          <xsd:element minOccurs="1" name="SyncTime" type="xsd:string" />
+          <xsd:element minOccurs="1" name="WebServer" type="xsd:string" />
+          <xsd:element minOccurs="1" name="RunbookId" type="xsd:string" />
+          <xsd:element minOccurs="1" name="Debug" type="xsd:boolean" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID ="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int"/>
+          <OverrideableParameter ID ="SyncTime" Selector="$Config/SyncTime$" ParameterType="string"/>
+          <OverrideableParameter ID ="Debug" Selector="$Config/Debug$" ParameterType="bool"/>
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DS" TypeID="MPAuthor.Orchestrator.DataSource.RunbookStatistics">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <WebServer>$Config/WebServer$</WebServer>
+              <Debug>$Config/Debug$</Debug>
+            </DataSource>
+            <ConditionDetection ID="FilterNotRunning" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="String">Property[@Name='RunbookId']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">$Config/RunbookId$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">Property[@Name='ActiveJobs']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="Integer">0</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="FilterRunning" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <And>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="String">Property[@Name='RunbookId']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Equal</Operator>
+                      <ValueExpression>
+                        <Value Type="String">$Config/RunbookId$</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                  <Expression>
+                    <SimpleExpression>
+                      <ValueExpression>
+                        <XPathQuery Type="Integer">Property[@Name='ActiveJobs']</XPathQuery>
+                      </ValueExpression>
+                      <Operator>Greater</Operator>
+                      <ValueExpression>
+                        <Value Type="Integer">0</Value>
+                      </ValueExpression>
+                    </SimpleExpression>
+                  </Expression>
+                </And>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="NotRunning">
+              <Node ID="FilterNotRunning">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Running">
+              <Node ID="FilterRunning">
+                <Node ID="DS" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+      
+    </MonitorTypes>
+
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        
+        <DisplayString ElementID="MPAuthor.Orchestrator.MonitorType.RunbookRunning">
+          <Name>Runbook Statistics Data Source</Name>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.MonitorType.RunbookRunning" SubElementID="IntervalSeconds">
+          <Name>Interval Seconds</Name>
+          <Description>Frequency in seconds that module is run.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.MonitorType.RunbookRunning" SubElementID="SyncTime">
+          <Name>Sync Time</Name>
+          <Description>Minutes after the hour that the running the module should be synchronized.</Description>
+        </DisplayString>
+        <DisplayString ElementID="MPAuthor.Orchestrator.MonitorType.RunbookRunning" SubElementID="Debug">
+          <Name>Debug</Name>
+          <Description>If True, debug events are written to the OperationsManager event log.</Description>
+        </DisplayString>
+
+        
+      </DisplayStrings>
+
+      <KnowledgeArticles>
+        <KnowledgeArticle ElementID="MPAuthor.Orchestrator.Rule.AlertOnRunbookMonitor" Visible="true">
+          <MamlContent>
+            <maml:section xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Summary</maml:title>
+              <maml:para>This rule looks for an event indicating a failure of Runbook Running Monitor.</maml:para>
+            </maml:section>
+            <maml:section xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Causes</maml:title>
+              <maml:para>This error typically occurs because the monitor is not able to access the Orchestrator web service.  This is most likely due to either an incorrect URL or credentials that don't have access to the web service.</maml:para>
+            </maml:section>
+            <maml:section xmlns:maml="http://schemas.microsoft.com/maml/2004/10">
+              <maml:title>Resolutions</maml:title>
+              <maml:list>
+                <maml:listItem>
+                  <maml:para>
+                    Verify that the credentials used by the monitor do not have access to the Orchestrator web server.  The credentials used by the discovery are specified by the Run As Profile called Orchestrator Web Service Account. Create a Windows Run As Account with permission to Orchestrator and assign to the Run As Configuration.
+                  </maml:para>
+                </maml:listItem>
+              </maml:list>
+            </maml:section>
+          </MamlContent>
+        </KnowledgeArticle>
+
+      </KnowledgeArticles>
+      
+    </LanguagePack>
+  </LanguagePacks>
+
+</ManagementPackFragment>

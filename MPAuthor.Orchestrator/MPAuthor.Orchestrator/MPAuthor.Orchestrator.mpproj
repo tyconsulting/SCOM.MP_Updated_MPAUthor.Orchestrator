@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{b196d73c-f077-4e51-870f-8a2dccc3fc52}</ProjectGuid>
+    <RootNamespace>MPAuthor.Orchestrator</RootNamespace>
+    <Name>MPAuthor Orchestrator</Name>
+    <ManagementPackName>MPAuthor.Orchestrator</ManagementPackName>
+    <Version>1.0.1.78</Version>
+    <MpFrameworkVersion>v6.1</MpFrameworkVersion>
+    <MpFrameworkProfile>OM</MpFrameworkProfile>
+    <ProductVersion>1.0.0.0</ProductVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <GenerateSealed>True</GenerateSealed>
+    <Company>MPAuthor</Company>
+    <Copyright>Copyright (c) MPAuthor. All rights reserved.</Copyright>
+    <DelaySigning>False</DelaySigning>
+    <AssemblyOriginatorKeyFile>Orchestrator.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <OutputPath>bin\Release\</OutputPath>
+    <DelaySigning>False</DelaySigning>
+    <Company>MyCompany</Company>
+    <Copyright>Copyright (c) MyCompany. All rights reserved.</Copyright>
+    <DelaySign>false</DelaySign>
+    <AssemblyOriginatorKeyFile />
+    <GenerateSealed>False</GenerateSealed>
+  </PropertyGroup>
+  <ItemGroup>
+    <ManagementPackReference Include="Microsoft.SystemCenter.2012.Orchestrator">
+      <HintPath>C:\Documents\MPRef\Microsoft.SystemCenter.2012.Orchestrator.mp</HintPath>
+      <Alias>Orch2012</Alias>
+      <MinVersion>6.1.14.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.InstanceGroup.Library">
+      <HintPath>C:\Documents\MPRef\Microsoft.SystemCenter.InstanceGroup.Library.mp</HintPath>
+      <Alias>SCIG</Alias>
+      <MinVersion>6.1.7221.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Library">
+      <Alias>SC</Alias>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.SystemCenter.Orchestrator.Library">
+      <HintPath>C:\Documents\MPRef\Microsoft.SystemCenter.Orchestrator.Library.mp</HintPath>
+      <Alias>Orch</Alias>
+      <MinVersion>6.1.14.0</MinVersion>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="Microsoft.Windows.Library">
+      <Alias>Windows</Alias>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Health.Library">
+      <Alias>Health</Alias>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+    <ManagementPackReference Include="System.Library">
+      <Alias>System</Alias>
+      <PackageToBundle>False</PackageToBundle>
+    </ManagementPackReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes" />
+    <Folder Include="Runbooks" />
+    <Folder Include="Presentation" />
+    <Folder Include="Runbooks\Scripts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Classes.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Classes\Discoveries.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Classes\Discoveries.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\DataSource.DiscoverRunbooks.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MPAuthor.Orchestrator.Rule.AlertOnRunbookMonitor.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Folders.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Presentation\Views.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Presentation\Views.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="AlertRules.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>AlertRules.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Runbooks\DataSource.RunbookStatistics.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Runbooks\Monitors.mptg.mpx">
+      <SubType>Code</SubType>
+      <DependentUpon>Runbooks\Monitors.mptg</DependentUpon>
+    </Compile>
+    <Compile Include="Runbooks\MonitorType.RunbookRunning.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Runbooks\Task.StartRunbook.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Runbooks\WriteAction.StartRunbook.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SecureReference.mpx">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Classes\Discoveries.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Presentation\Views.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="AlertRules.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+    <Content Include="Runbooks\Monitors.mptg">
+      <SubType>Content</SubType>
+      <Generator>FragmentGenerator</Generator>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Classes\DiscoverRunbooks.ps1" />
+    <EmbeddedResource Include="Runbooks\Scripts\RunbookStatistics.ps1" />
+    <EmbeddedResource Include="Runbooks\Scripts\StartRunbook.ps1" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VSAC\Microsoft.SystemCenter.OperationsManager.targets" />
+</Project>

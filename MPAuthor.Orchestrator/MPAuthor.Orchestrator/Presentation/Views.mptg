@@ -1,0 +1,31 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance85f9982a975c4ef297f1ba9281b588e4" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ViewFolder>MPAuthor.Orchestrator.Folders</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <ViewConfiguration>&lt;Criteria /&gt;&lt;Presentation&gt;&lt;ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending"&gt;&lt;Name&gt;State&lt;/Name&gt;&lt;Id&gt;MPAuthor.Orchestrator.Runbook-*-43bc8e45-ce09-2e34-4403-1fc265000da8-*-Health&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="1" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending"&gt;&lt;Name&gt;In Maintenance Mode&lt;/Name&gt;&lt;Id&gt;InMaintenanceMode&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending"&gt;&lt;Name&gt;Name&lt;/Name&gt;&lt;Id&gt;Name&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="3" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending"&gt;&lt;Name&gt;Path&lt;/Name&gt;&lt;Id&gt;Path&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="4" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending"&gt;&lt;Name&gt;Display Name&lt;/Name&gt;&lt;Id&gt;System.Entity/DisplayName&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="5" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending"&gt;&lt;Name&gt;ID&lt;/Name&gt;&lt;Id&gt;MPAuthor.Orchestrator.Runbook/ID&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="6" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending"&gt;&lt;Name&gt;Name&lt;/Name&gt;&lt;Id&gt;MPAuthor.Orchestrator.Runbook/Name&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="7" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending"&gt;&lt;Name&gt;Path&lt;/Name&gt;&lt;Id&gt;MPAuthor.Orchestrator.Runbook/Path&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="false" SortOrder="Ascending"&gt;&lt;Name&gt;WebPath&lt;/Name&gt;&lt;Id&gt;MPAuthor.Orchestrator.Runbook/WebPath&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="false" Visible="true" SortOrder="Ascending"&gt;&lt;Name&gt;Is Monitor&lt;/Name&gt;&lt;Id&gt;MPAuthor.Orchestrator.Runbook/IsMonitor&lt;/Id&gt;&lt;/ColumnInfo&gt;&lt;/Presentation&gt;&lt;Target&gt;$MPElement[Name="MPAuthor.Orchestrator.Group.MonitorRunbooks"]$&lt;/Target&gt;</ViewConfiguration>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.MonitorRunbooks</Id>
+        <DisplayName>Monitor Runbooks</DisplayName>
+        <Description />
+        <Target>MPAuthor.Orchestrator.Runbook</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instance2b9acbe3390e4536b59fae642951a043" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>MPAuthor.Orchestrator.Folders</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.AllRunbooks</Id>
+        <DisplayName>All Runbooks</DisplayName>
+        <Description />
+        <Target>MPAuthor.Orchestrator.Runbook</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

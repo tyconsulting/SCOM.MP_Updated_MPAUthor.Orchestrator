@@ -1,0 +1,46 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance3d5876a2e98b4569931758d52012d10f" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Id>Discovery.Runbooks</Id>
+        <DisplayName>Discover Runbooks</DisplayName>
+        <Description>Discovers all runbooks availble from the Orchestrator web service.  Discovery is disabled by default.  You must provide credentials for the Orchestrator Web Service Account and then enable this discovery with an override.</Description>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;IntervalSeconds&gt;3600&lt;/IntervalSeconds&gt;&lt;ComputerName&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/ComputerName&gt;&lt;MgmtServerInstallPath&gt;$Target/Property[Type='Orch2012!Microsoft.SystemCenter.2012.Orchestrator.Role.ManagementServer']/InstallPath$&lt;/MgmtServerInstallPath&gt;&lt;Debug&gt;false&lt;/Debug&gt;&lt;TimeoutSeconds&gt;600&lt;/TimeoutSeconds&gt;</DataSourceConfig>
+        <DataSourceRunAs>MPAuthor.Orchestrator.RunAsProfile.WebServiceAccount</DataSourceRunAs>
+        <DataSourceType>MPAuthor.Orchestrator.DataSource.DiscoverRunbooks</DataSourceType>
+        <Target>Orch2012!Microsoft.SystemCenter.2012.Orchestrator.Role.ManagementServer</Target>
+        <Enabled>false</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses>
+          <DiscoveryClassItem>
+            <TypeId>MPAuthor.Orchestrator.Runbook</TypeId>
+            <Properties />
+          </DiscoveryClassItem>
+        </DiscoveryClasses>
+        <DiscoveryRelationships />
+      </DiscoveryConfig>
+    </Instance>
+    <Instance ID="Instance42c3b356a1f647ff9ed57dac6d88ab29" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.Discovery" Version="1.0.0.0">
+      <DiscoveryConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Discovery.PopulateMonitorRunbooks</Id>
+        <DisplayName>Populate Monitor Runbooks</DisplayName>
+        <Description>Populates Monitor Runbooks</Description>
+        <DataSourceId>DS</DataSourceId>
+        <DataSourceConfig>&lt;RuleId&gt;$MPElement$&lt;/RuleId&gt;&lt;GroupInstanceId&gt;$Target/Id$&lt;/GroupInstanceId&gt;&lt;MembershipRules&gt;&lt;MembershipRule&gt;&lt;MonitoringClass&gt;$MPElement[Name="MPAuthor.Orchestrator.Runbook"]$&lt;/MonitoringClass&gt;&lt;RelationshipClass&gt;$MPElement[Name="SCIG!Microsoft.SystemCenter.InstanceGroupContainsEntities"]$&lt;/RelationshipClass&gt;&lt;Expression&gt;&lt;SimpleExpression&gt;&lt;ValueExpression&gt;&lt;Property&gt;$MPElement[Name="MPAuthor.Orchestrator.Runbook"]/IsMonitor$&lt;/Property&gt;&lt;/ValueExpression&gt;&lt;Operator&gt;Equal&lt;/Operator&gt;&lt;ValueExpression&gt;&lt;Value&gt;true&lt;/Value&gt;&lt;/ValueExpression&gt;&lt;/SimpleExpression&gt;&lt;/Expression&gt;&lt;/MembershipRule&gt;&lt;/MembershipRules&gt;</DataSourceConfig>
+        <DataSourceType>SC!Microsoft.SystemCenter.GroupPopulator</DataSourceType>
+        <Target>MPAuthor.Orchestrator.Group.MonitorRunbooks</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Category>Discovery</Category>
+        <DiscoveryClasses />
+        <DiscoveryRelationships />
+      </DiscoveryConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

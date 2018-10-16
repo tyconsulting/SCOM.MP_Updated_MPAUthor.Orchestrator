@@ -1,0 +1,20 @@
+﻿<ManagementPackFragment SchemaVersion="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <TypeDefinitions>
+    <SecureReferences>
+      <SecureReference ID="MPAuthor.Orchestrator.RunAsProfile.WebServiceAccount" Accessibility="Public" Context="System!System.Entity"/>
+    </SecureReferences>
+  </TypeDefinitions>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="MPAuthor.Orchestrator.RunAsProfile.WebServiceAccount">
+          <Name>Orchestrator Web Service Account</Name>
+          <Description>Credentials to access Orchestrator web service.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+
+</ManagementPackFragment>

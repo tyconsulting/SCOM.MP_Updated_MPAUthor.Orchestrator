@@ -1,0 +1,30 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance90b919faa5c7422aa7d2ccaaf480bd8a" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.AlertRule" Version="1.0.0.0">
+      <AlertRuleConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <Id>Rule.AlertOnRunbookDiscovery</Id>
+        <DisplayName>Alert on failure of Runbook Discovery</DisplayName>
+        <Description>Create alert when the Discover Runbooks process was unable to retrieve any runbooks.</Description>
+        <Category>Alert</Category>
+        <ConfirmDelivery>false</ConfirmDelivery>
+        <Target>Orch2012!Microsoft.SystemCenter.2012.Orchestrator.Role.ManagementServer</Target>
+        <Enabled>true</Enabled>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <DiscardLevel>100</DiscardLevel>
+        <DataSources>
+          <RuleDataSourceItem>
+            <DataSourceId>DS</DataSourceId>
+            <DataSourceConfig>&lt;ComputerName&gt;$Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$&lt;/ComputerName&gt;&lt;LogName&gt;Operations Manager&lt;/LogName&gt;&lt;Expression&gt;&lt;And&gt;&lt;Expression&gt;&lt;SimpleExpression&gt;&lt;ValueExpression&gt;&lt;XPathQuery Type="UnsignedInteger"&gt;EventDisplayNumber&lt;/XPathQuery&gt;&lt;/ValueExpression&gt;&lt;Operator&gt;Equal&lt;/Operator&gt;&lt;ValueExpression&gt;&lt;Value Type="UnsignedInteger"&gt;225&lt;/Value&gt;&lt;/ValueExpression&gt;&lt;/SimpleExpression&gt;&lt;/Expression&gt;&lt;Expression&gt;&lt;SimpleExpression&gt;&lt;ValueExpression&gt;&lt;XPathQuery Type="String"&gt;PublisherName&lt;/XPathQuery&gt;&lt;/ValueExpression&gt;&lt;Operator&gt;Equal&lt;/Operator&gt;&lt;ValueExpression&gt;&lt;Value Type="String"&gt;Health Service Script&lt;/Value&gt;&lt;/ValueExpression&gt;&lt;/SimpleExpression&gt;&lt;/Expression&gt;&lt;/And&gt;&lt;/Expression&gt;</DataSourceConfig>
+            <DataSourceType>Windows!Microsoft.Windows.EventProvider</DataSourceType>
+          </RuleDataSourceItem>
+        </DataSources>
+        <ConditionDetectionId>CD</ConditionDetectionId>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>Error</AlertSeverity>
+        <AlertName>Runbook Discovery was unable to retrieve any runbooks.</AlertName>
+        <AlertDescription>The discovery was run against $Target/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$.</AlertDescription>
+      </AlertRuleConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

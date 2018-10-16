@@ -1,0 +1,29 @@
+﻿<ManagementPackFragment SchemaVersion="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Monitoring>
+    <Tasks>
+      <Task ID="MPAuthor.Orchestrator.Task.StartRunbook" Target="MPAuthor.Orchestrator.Runbook" Enabled ="true" Accessibility="Public">
+        <Category>Custom</Category>
+        <WriteAction ID="WA" TypeID="MPAuthor.Orchestrator.WriteAction.StartRunbook" RunAs="MPAuthor.Orchestrator.RunAsProfile.WebServiceAccount">
+          <RunbookPath>$Target/Property[Type="MPAuthor.Orchestrator.Runbook"]/Path$</RunbookPath>
+          <ParameterString />
+          <WebServer>$Target/Host/Host/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</WebServer>
+          <WaitUntilDone>false</WaitUntilDone>
+          <Debug>false</Debug>
+        </WriteAction>
+      </Task>
+    </Tasks>
+  </Monitoring>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="MPAuthor.Orchestrator.Task.StartRunbook">
+          <Name>Start Runbook</Name>
+          <Description>Starts a runbook.</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+  
+</ManagementPackFragment>
